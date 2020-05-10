@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="depCheck" default="run" basedir=".">
+    <description>
+        finally learning what ANT is .. Yayyy!!
+    </description>
+    <property name="buildDir" value="${basedir}/build"/>
+    <property name="classesDes" value="${buildDir}/classes"/>
+    <property name="jarLocation" value="${buildDir}/lib"/>
+    <property name="jarname" value="${jarLocation}/${ant.project.name}.jar"/>
+    <classfileset id="reqdClasses" dir="${classesDes}">
+        <root classname="Test"/>
+    </classfileset>
+    <target name="printDir">
+        <echo message="current dir is ${basedir}" />
+    </target>
+    <target name="cleanStage" depends="printDir">
+        <delete verbose="true">
+            <!--Excludes files in build folder but deletes subdirectories and their files-->
+            <fileset dir="${basedir}/build" excludes="*" />
+            <dirset dir="${basedir}/build" includes="**/*" />
+        </delete>
+    </target>
+    <target name="createDir" depends="cleanStage">
+        <mkdir dir="${classesDes}"/>
+        <mkdir dir="${jarLocation}"/>
+    </target>
+    <target name="compileStage" depends="createDir">
+        <javac srcdir="." includeantruntime="false" destdir="${classesDes}" includes="*.java">
+        </javac>
+    </target>
+    <target name="buildJar" depends="compileStage">
+        <jar destfile="${jarname}">
+            <fileset refid="reqdClasses"/>
+        </jar>
+    </target>
+    <target name="run" depends="buildJar">
+        <java classname="Test" classpath="${jarname}"/>
+    </target>
+</project>

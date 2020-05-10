@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="java_compile" default="run">
+    <target name="compile">
+        <javac srcdir="." includeantruntime="true" includes="HelloWorld.java" destdir="."/>
+    </target>
+    <target name="run" depends="compile">
+        <java classname="HelloWorld" fork="true">
+            <classpath>
+                <pathelement path="."/>
+            </classpath>
+        </java>    
+    </target>
+</project>

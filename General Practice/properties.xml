@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project default="displayProperties">
+    <property file="build.properties"/>
+    <property name="someKey" value="somevalue"/>
+    <property name="myUrl" value="www.company.com"/>
+    <target name="displayProperties">
+        <echo message="From properties file: ${scriptname}"/>
+        <echo message="User defined properties: somekey :${somekey},myUrl:${myUrl}"/>
+        <echo message="System properties: OS Name: ${os.name}, JVM Vendor: ${java.vm.vendor}"/>
+        <echo message="System properties: OS Name: ${basedir}, JVM Vendor: ${ant.home}"/>
+        <fileset id="xmlfiles" dir="." includes="*.xml"/>
+        <echo>toString of fileset: ${toString:xmlfiles}</echo>
+    </target>
+</project>
